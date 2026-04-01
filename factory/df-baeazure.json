@@ -1,0 +1,9 @@
+{
+	"name": "df-baeazure",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "45273cef-f8e7-4a53-a5ca-f1502e96bfe9",
+		"tenantId": "515a24ed-c686-4d4e-a97a-c12a7f3f7670"
+	}
+}
