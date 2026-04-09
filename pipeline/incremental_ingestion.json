@@ -170,7 +170,7 @@
 						"parameters": {
 							"container": "bronze",
 							"folder": "cdc",
-							"file": "empty"
+							"file": "empty_json"
 						}
 					}
 				]
