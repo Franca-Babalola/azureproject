@@ -152,6 +152,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "JsonSource",
+						"additionalColumns": [
+							{
+								"name": "cdc",
+								"value": "$$FILEPATH"
+							}
+						],
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
@@ -179,7 +185,7 @@
 						"parameters": {
 							"container": "bronze",
 							"folder": "cdc",
-							"file": "empty_json"
+							"file": "empty.json"
 						}
 					}
 				],
