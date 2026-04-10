@@ -161,6 +161,15 @@
 							"type": "JsonReadSettings"
 						}
 					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
 					"enableStaging": false
 				},
 				"inputs": [
@@ -171,6 +180,17 @@
 							"container": "bronze",
 							"folder": "cdc",
 							"file": "empty_json"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "json_dynamics1",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "bronze",
+							"folder": "cdc",
+							"file": "cdc.json"
 						}
 					}
 				]
