@@ -31,30 +31,22 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "SELECT * FROM @{pipeline().parameters.schema}.@{pipeline().parameters.table} WHERE @{pipeline().parameters.cdc_col} >",
+							"value": "SELECT * FROM @{pipeline().parameters.schema}.@{pipeline().parameters.table} WHERE @{pipeline().parameters.cdc_col} > '@{activity('lastt_cdc').output.value[0].cdc}activity('lastt_cdc').output.count'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "ParquetSink",
+						"type": "JsonSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
-							"type": "ParquetWriteSettings"
+							"type": "JsonWriteSettings"
 						}
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
@@ -64,16 +56,8 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "parquet_dynamics",
-						"type": "DatasetReference",
-						"parameters": {
-							"container": "bronze",
-							"folder": "Users",
-							"file": {
-								"value": "@concat(pipeline().parameters.table,'_',variables('current'))",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "json_dynamics1",
+						"type": "DatasetReference"
 					}
 				]
 			},
@@ -125,7 +109,7 @@
 				"typeProperties": {
 					"variableName": "current",
 					"value": {
-						"value": "@formatDateTime(utcNow(), 'yyyy-MM-dd HH:mm:ss')",
+						"value": "@utcNow()",
 						"type": "Expression"
 					}
 				}
